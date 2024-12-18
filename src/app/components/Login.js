@@ -1,9 +1,15 @@
 'use client';
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+    const router = useRouter();
+
     function handleLogin () {}
 
-    function handleRegister () {}
+    function handleRegister ()
+    {
+        router.push('/register');
+    }
     
     return (
         <div>
