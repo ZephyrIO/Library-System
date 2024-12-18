@@ -1,13 +1,13 @@
 'use client';
 
-export default function Login() {
+export default function Register() {
     function handleLogin () {}
 
     function handleRegister () {}
     
     return (
         <div>
-            <form action={handleLogin}>
+            <form action={handleRegister}>
                 <input
                     type="email"
                     name="email"
@@ -20,9 +20,15 @@ export default function Login() {
                     placeholder="password"
                     required
                 />
+                <input
+                    type="password"
+                    name="confirm-password"
+                    placeholder="confirm password"
+                    required
+                />
                 <div className="button-group">
-                    <button type="submit" className="login">Login</button>
-                    <button type="button" className="register" onClick={handleRegister}>Register a new Account</button>
+                    <button type="submit" className="register">Create Account</button>
+                    <button type="button" className="login" onClick={handleLogin}>Login with Existing Account</button>
                 </div>
             </form>
         </div>
