@@ -4,7 +4,10 @@ import { useRouter } from "next/navigation";
 export default function Register() {
     const router = useRouter()
 
-    function handleRegister () {}
+    function handleRegister ()
+    {
+        router.push('/');
+    }
 
     function handleLogin ()
     {

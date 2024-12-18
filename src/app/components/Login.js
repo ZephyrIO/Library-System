@@ -4,7 +4,10 @@ import { useRouter } from "next/navigation";
 export default function Login() {
     const router = useRouter();
 
-    function handleLogin () {}
+    function handleLogin ()
+    {
+        router.push('/view');
+    }
 
     function handleRegister ()
     {
