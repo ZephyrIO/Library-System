@@ -1,5 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
+import './Register.css';
 
 export default function Register() {
     const router = useRouter()
@@ -15,7 +16,7 @@ export default function Register() {
     }
     
     return (
-        <div>
+        <div className="register">
             <form action={handleRegister}>
                 <input
                     type="email"
@@ -36,8 +37,8 @@ export default function Register() {
                     required
                 />
                 <div className="button-group">
-                    <button type="submit" className="register">Create Account</button>
-                    <button type="button" className="login" onClick={handleLogin}>Login with Existing Account</button>
+                    <button type="submit" className="action">Create Account</button>
+                    <button type="button" className="login" onClick={handleLogin}>Login</button>
                 </div>
             </form>
         </div>
