@@ -1,5 +1,6 @@
 'use client';
 import { useRouter } from "next/navigation";
+import './AddItems.css';
 
 export default function AddItems ()
 {
@@ -16,9 +17,10 @@ export default function AddItems ()
     return (
         <div>
             <div>
-                <button className="view-button" onClick={returnHome}>Return Home</button>
+                <button className="home-button" onClick={returnHome}>Return Home</button>
+                <h1 className="title">Add Item</h1>
             </div>
-            <form action={addItem}>
+            <form className="add-item" action={addItem}>
                 <input
                     type="text"
                     name="title"
@@ -26,7 +28,7 @@ export default function AddItems ()
                     required
                 />
                 <select name="type" id="type">
-                    <option value={''}>Type of the work</option>
+                    <option value={'null'}>Type of the work</option>
                     <option value={'book'}>Book</option>
                     <option value={'movie'}>Movie</option>
                     <option value={'video_game'}>Video Game</option>
@@ -45,7 +47,7 @@ export default function AddItems ()
                     name="release_date"
                     required
                 />
-                <button type="submit">Add Item</button>
+                <button className="submit" type="submit">Add</button>
             </form>
         </div>
     )

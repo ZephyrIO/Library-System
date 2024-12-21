@@ -1,0 +1,66 @@
+.title {
+    justify-self: center;
+}
+
+.add-item {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+    height: 100vh; /* Full viewport height */
+    width: 100%;
+}
+
+.home-button {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.submit {
+    background-color: darkgreen;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+form {
+    background-color: lightpink;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    width: 80%;
+    max-width: 400px;
+    max-height: 200px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    background-color: black;
+    margin: 0px 5px;
+    font-size: 16px;
+}
+
+input::placeholder {
+    color: white;
+}
+
+select {
+    background-color: black;
+    margin: 0px 5px;
+    font-size: 16px;
+}
+
+select::placeholder {
+    color: white;
+}
