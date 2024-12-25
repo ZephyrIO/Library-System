@@ -1,13 +1,27 @@
 'use client';
 import { useRouter } from "next/navigation";
+import sql from '@/backend/db.js';
 import './Login.css';
 
 export default function Login() {
     const router = useRouter();
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
-    function handleLogin ()
+    function handleLogin (e)
     {
+        e.preventDefault();
         router.push('/view');
+    }
+
+    function handleInputChange (e)
+    {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value,
+        });
     }
 
     function handleRegister ()
@@ -23,12 +37,16 @@ export default function Login() {
                     name="email"
                     placeholder="user@example.com"
                     required
+                    value={formData.email}
+                    onChange={handleInputChange}
                 />
                 <input
                     type="password"
                     name="password"
                     placeholder="password"
                     required
+                    value={formData.email}
+                    onChange={handleInputChange}
                 />
                 <div className="button-group">
                     <button type="submit" className="action">Login</button>
