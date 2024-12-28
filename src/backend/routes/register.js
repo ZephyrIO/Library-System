@@ -38,12 +38,12 @@ router.post('/register', async (req, res) => {
         const verificationToken = jwt.sign({userId: newUserID}, JWT_SECRET, { expiresIn: '1d' });
         
         // Respond with success if everything goes well
-        return res.status(201).json({ message: 'User registered successfully', userId: savedUser._id });
+        return res.status(201).json({message: 'User registered successfully', userId: newUserID});
     } catch (error)
     {
         // If something went wrong, return an error
         console.error('Error during registration:', error);
-        return res.status(500).json({ message: 'Error registering user', error });
+        return res.status(500).json({message: 'Error registering user', error});
     }
 });
 
