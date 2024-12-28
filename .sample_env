@@ -1,0 +1,8 @@
+# Fill the following information with the information for your postgres database and
+# rename this file to .env in order for the program to work properly
+
+USER = [username]
+HOST = [hostname]
+DATABASE = [database-name]
+PASSWORD = [password]
+JWT_SECRET = [secret_passphrase]

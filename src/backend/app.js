@@ -1,14 +1,11 @@
-import postgres from 'postgres';
+const express = require('express');
 
-const sql = postgres({
-    host: '',           // Postgres ip address[s] or domain name[s]
-    port: 5432,         // Postgres server port[s]
-    database: '',       // Name of database to connect to
-    username: '',       // Username of database user
-    password: '',       // Password of database user
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
-export default sql;
 
 /**
  * The database should be designed as follows:
