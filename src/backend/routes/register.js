@@ -20,13 +20,13 @@ const sql = postgres({
 });
 
 router.post('/register', async (req, res) => {
-    const {email, password, confirmPassword} = req.body;
+    const {email, password} = req.body;
 
     try
     {
         // check if a user with the same email exists already
-        const existingAccounts = getExistingAccounts(email);
-        if (existingAccounts)
+        let existingAccounts = await getExistingAccounts(email);
+        if (existingAccounts.count > 0)
         {
             return res.status(400).json({message: 'User already exists'});
         }
@@ -50,12 +50,13 @@ router.post('/register', async (req, res) => {
 async function getExistingAccounts (email)
 {
     const existingAccounts = await sql`SELECT * FROM users WHERE email = ${email}`;
+    console.log(existingAccounts);
     return existingAccounts;
 }
 
 async function createAccount (email, hashedPassword)
 {
-    const result = await sql`INSERT INTO users (email, password, isAdmin, lastUpd_Usr, lastUpd_TS) values (${email}, ${hashedPassword}, FALSE, ${email}, CURRENT_TIMESTAMP)`;
+    const result = await sql`INSERT INTO users (email, password, isadmin, lastupd_usr, lastupd_ts) values (${email}, ${hashedPassword}, FALSE, ${email}, CURRENT_TIMESTAMP)`;
     return result;
 }
 

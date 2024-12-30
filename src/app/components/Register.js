@@ -8,33 +8,27 @@ export default function Register() {
     const [formData, setFormData] = useState({
         email: '',
         password: '',
-        confirmPassword: '',
     });
     const router = useRouter()
 
     async function handleRegister (e)
     {
-        e.preventDefault();
-        if (formData.password == formData.confirmPassword)
+        console.log(e);
+        try
         {
-            try 
-            {
-                const response = await axios.post('http://localhost:3001/api/register', formData);
-                alert(response.data.message);
-                router.push('/');
-            } catch (error)
-            {
-                console.error('Error registering:', error);
+            const response = await axios.post('http://localhost:3001/api/register', formData);
+            alert(response.data.message);
+            router.push('/');
+        } catch (error)
+        {
+            console.error('Error registering:', error);
 
-                // Show the exact error message from the backend
-                if (error.response && error.response.data) {
-                    alert(`Registration failed: ${error.response.data.message}`);
-                } else {
-                    alert('Registration failed. Please try again.');
-                }
+            // Show the exact error message from the backend
+            if (error.response && error.response.data) {
+                alert(`Registration failed: ${error.response.data.message}`);
+            } else {
+                alert('Registration failed. Please try again.');
             }
-        } else {
-            alert('Registration failed: Passwords do not match. Try Again.');
         }
     }
 
@@ -69,14 +63,6 @@ export default function Register() {
                     placeholder="password"
                     required
                     value={formData.password}
-                    onChange={handleInputChange}
-                />
-                <input
-                    type="password"
-                    name="confirm-password"
-                    placeholder="confirm password"
-                    required
-                    value={formData.confirmPassword}
                     onChange={handleInputChange}
                 />
                 <div className="button-group">

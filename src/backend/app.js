@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config();
 
 const registerRouter = require('./routes/register');
@@ -7,6 +8,12 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 app.use(express.json());
+app.use(cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Allow necessary methods
+    credentials: true, // Include credentials if needed
+}));
+
 app.use('/api', registerRouter); // Register Route
 
 app.listen(PORT, () => {

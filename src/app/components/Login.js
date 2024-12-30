@@ -45,7 +45,7 @@ export default function Login() {
                     name="password"
                     placeholder="password"
                     required
-                    value={formData.email}
+                    value={formData.password}
                     onChange={handleInputChange}
                 />
                 <div className="button-group">
