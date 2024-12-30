@@ -1,7 +1,13 @@
 const express = require('express');
+require('dotenv').config();
+
+const registerRouter = require('@/backend/routes/register');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(express.json());
+app.use('/api', registerRouter); // Register Route
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
