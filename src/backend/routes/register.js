@@ -64,3 +64,5 @@ async function getUserID (email)
     const userID = await sql`SELECT id FROM users WHERE email = ${email}`;
     return userID;
 }
+
+module.exports = router;

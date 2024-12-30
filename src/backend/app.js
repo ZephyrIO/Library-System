@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 
-const registerRouter = require('@/backend/routes/register');
+const registerRouter = require('./routes/register');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
