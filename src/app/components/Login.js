@@ -1,6 +1,7 @@
 'use client';
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 import './Login.css';
 
 export default function Login() {
@@ -10,10 +11,33 @@ export default function Login() {
         password: '',
     });
 
-    function handleLogin (e)
+    async function handleLogin (e)
     {
-        e.preventDefault();
-        router.push('/view');
+        try
+        {
+            const response = await axios.post('http://localhost:3001/api/login', formData);
+            console.log(response);
+            alert(response.data.message);
+            
+            setUserData({
+                token: response.data.token,
+                user: response.data.user,
+            });
+            console.log(userData);
+            localStorage.setItem('userData', JSON.stringify(userData));
+
+            router.push('/view');
+        } catch (error)
+        {
+            console.error('Error logging in:', error);
+
+            // Show the exact error message from the backend
+            if (error.response && error.response.data) {
+                alert(`Login failed: ${error.response.data.message}`);
+            } else {
+                alert('Login failed. Please try again.');
+            }
+        }
     }
 
     function handleInputChange (e)

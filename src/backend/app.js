@@ -3,6 +3,7 @@ const cors = require('cors');
 require('dotenv').config();
 
 const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -15,6 +16,7 @@ app.use(cors({
 }));
 
 app.use('/api', registerRouter); // Register Route
+app.use('/api', loginRouter); // Login Route
 
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
