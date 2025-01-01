@@ -29,7 +29,7 @@ router.post('/login', async (req, res) => {
         }
 
         // Find the user by email
-        const accounts = getAccounts(email);
+        const accounts = await getAccounts(email);
         if (accounts.count == 0)
         {
             return res.status(400).json({msg: 'User with this email does not exist.'});
@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
         // Generate a JWT token
         const userID = accounts[0].id;
         const token = jwt.sign({id: userID}, JWT_SECRET);
-        
+
         // Respond with the token and user details
         const userIsAdmin = accounts[0].isadmin;
         res.json({
@@ -54,12 +54,11 @@ router.post('/login', async (req, res) => {
             user: {
                 id: userID,
                 email: email,
-                isAdmin: userIsAdmin,
+                isadmin: userIsAdmin,
             },
         });
-
     } catch (err) {
-        res.status(500).json({error: err.message});
+        res.status(500).json({error: err});
     }
 });
 

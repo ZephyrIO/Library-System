@@ -16,7 +16,7 @@ export default function Login() {
         try
         {
             const response = await axios.post('http://localhost:3001/api/login', formData);
-            alert(response.data.message);
+            alert(response.msg);
             router.push('/view');
         } catch (error)
         {
@@ -24,7 +24,7 @@ export default function Login() {
 
             // Show the exact error message from the backend
             if (error.response && error.response.data) {
-                alert(`Login failed: ${error.response.data.message}`);
+                alert(`Login failed: ${error.response.msg}`);
             } else {
                 alert('Login failed. Please try again.');
             }
