@@ -19,6 +19,55 @@ const sql = postgres({
     password: password,
 });
 
-router.post();
+router.post('/login', async (req, res) => {
+    const {email, password} = req.body;
+
+    try {
+        // Check if email and password are provided
+        if (!email || !password) {
+            return res.status(400).json({msg: 'Please enter all fields.'});
+        }
+
+        // Find the user by email
+        const accounts = getAccounts(email);
+        if (accounts.count == 0)
+        {
+            return res.status(400).json({msg: 'User with this email does not exist.'});
+        }
+
+        const storedPassword = accounts[0].password;
+
+        // Compare the password with the stored hashed password
+        const isMatch = await bcrypt.compare(password, storedPassword);
+        if (!isMatch) {
+            return res.status(400).json({msg: 'Incorrect password.'});
+        }
+
+        // Generate a JWT token
+        const userID = accounts[0].id;
+        const token = jwt.sign({id: userID}, JWT_SECRET);
+        
+        // Respond with the token and user details
+        const userIsAdmin = accounts[0].isadmin;
+        res.json({
+            token,
+            user: {
+                id: userID,
+                email: email,
+                isAdmin: userIsAdmin,
+            },
+        });
+
+    } catch (err) {
+        res.status(500).json({error: err.message});
+    }
+});
+
+async function getAccounts (email)
+{
+    const existingAccounts = await sql`SELECT * FROM users WHERE email = ${email}`;
+    console.log(existingAccounts);
+    return existingAccounts;
+}
 
 module.exports = router;
