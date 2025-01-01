@@ -1,5 +1,6 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const router = express.Router();
 const postgres = require('postgres');
 
@@ -32,8 +33,8 @@ router.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         createAccount(email, hashedPassword);
-
-        const newUserID = getUserID(email);
+        
+        const newUserID = existingAccounts[0].id;
         
         // Respond with success if everything goes well
         return res.status(201).json({message: 'User registered successfully', userId: newUserID});
@@ -56,12 +57,6 @@ async function createAccount (email, hashedPassword)
 {
     const result = await sql`INSERT INTO users (email, password, isadmin, lastupd_usr, lastupd_ts) values (${email}, ${hashedPassword}, FALSE, ${email}, CURRENT_TIMESTAMP)`;
     return result;
-}
-
-async function getUserID (email)
-{
-    const userID = await sql`SELECT id FROM users WHERE email = ${email}`;
-    return userID;
 }
 
 module.exports = router;
