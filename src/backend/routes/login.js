@@ -56,7 +56,7 @@ router.post('/login', async (req, res) => {
                 email: email,
                 isadmin: userIsAdmin,
             },
-            message: 'Account created successfully',
+            message: 'Logged in successfully',
         });
     } catch (err) {
         res.status(500).json({error: err});
