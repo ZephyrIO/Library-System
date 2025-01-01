@@ -18,6 +18,14 @@ export default function Login() {
             const response = await axios.post('http://localhost:3001/api/login', formData);
             console.log(response);
             alert(response.data.message);
+            
+            setUserData({
+                token: response.data.token,
+                user: response.data.user,
+            });
+            console.log(userData);
+            localStorage.setItem('userData', JSON.stringify(userData));
+
             router.push('/view');
         } catch (error)
         {
