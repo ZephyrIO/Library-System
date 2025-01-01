@@ -13,7 +13,6 @@ export default function Register() {
 
     async function handleRegister (e)
     {
-        console.log(e);
         try
         {
             const response = await axios.post('http://localhost:3001/api/register', formData);
