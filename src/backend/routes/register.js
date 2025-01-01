@@ -1,14 +1,13 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 const router = express.Router();
 const postgres = require('postgres');
 
 require('dotenv').config();
-const user = process.env.USER;
-const host = process.env.HOST;
-const database = process.env.DATABASE;
-const password = process.env.PASSWORD;
+const user = process.env.USER || 'user';
+const host = process.env.HOST || 'host';
+const database = process.env.DATABASE || 'database';
+const password = process.env.PASSWORD || 'password';
 const JWT_SECRET = process.env.JWT_SECRET || 'fallbackSecret';
 
 const sql = postgres({
@@ -33,9 +32,8 @@ router.post('/register', async (req, res) => {
 
         const hashedPassword = await bcrypt.hash(password, 10);
         createAccount(email, hashedPassword);
-        
+
         const newUserID = getUserID(email);
-        const verificationToken = jwt.sign({userId: newUserID}, JWT_SECRET, { expiresIn: '1d' });
         
         // Respond with success if everything goes well
         return res.status(201).json({message: 'User registered successfully', userId: newUserID});
