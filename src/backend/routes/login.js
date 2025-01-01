@@ -25,14 +25,14 @@ router.post('/login', async (req, res) => {
     try {
         // Check if email and password are provided
         if (!email || !password) {
-            return res.status(400).json({msg: 'Please enter all fields.'});
+            return res.status(400).json({message: 'Please enter all fields.'});
         }
 
         // Find the user by email
         const accounts = await getAccounts(email);
         if (accounts.count == 0)
         {
-            return res.status(400).json({msg: 'User with this email does not exist.'});
+            return res.status(400).json({message: 'User with this email does not exist.'});
         }
 
         const storedPassword = accounts[0].password;
@@ -40,7 +40,7 @@ router.post('/login', async (req, res) => {
         // Compare the password with the stored hashed password
         const isMatch = await bcrypt.compare(password, storedPassword);
         if (!isMatch) {
-            return res.status(400).json({msg: 'Incorrect password.'});
+            return res.status(400).json({message: 'Incorrect password.'});
         }
 
         // Generate a JWT token
@@ -56,6 +56,7 @@ router.post('/login', async (req, res) => {
                 email: email,
                 isadmin: userIsAdmin,
             },
+            message: 'Account created successfully',
         });
     } catch (err) {
         res.status(500).json({error: err});
